@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-abyssal: #020617;
+    --color-surface: #090D1E;
+    --color-gold: #D4AF37;
+    --color-gold-light: #F3E5AB;
+    --color-starlight: #F8FAFC;
+    --color-silver: #94A3B8;
+  }
+
+  body {
+    font-family: 'DM Sans', 'Plus Jakarta Sans', sans-serif;
+    background-color: #020617;
+    color: #F8FAFC;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: -0.015em;
+  }
+
+  .font-brand {
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  .font-dmsans {
+    font-family: 'DM Sans', sans-serif;
+  }
+}
+
+/* Custom luxury gold effects */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #FFF6E0 0%, #F3E5AB 25%, #D4AF37 70%, #AA820A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-border {
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.05), inset 0 0 15px rgba(212, 175, 55, 0.02);
+}
+
+.gold-glow {
+  filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.4));
+}
+
+.gold-glow-subtle {
+  filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.25));
+}
+
+.glass-panel {
+  background: rgba(9, 13, 30, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(212, 175, 55, 0.35);
+  box-shadow: 0 10px 40px -10px rgba(212, 175, 55, 0.12);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(212, 175, 55, 0.6);
+}
