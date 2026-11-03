@@ -90,7 +90,7 @@ export const FounderSection: React.FC = () => {
             </div>
 
             <a
-              href="mailto:shivanshmalaviya@gmail.com"
+              href="mailto:shivansh@vayomira.com"
               className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#020617] bg-gradient-to-r from-[#F3E5AB] via-[#D4AF37] to-[#C59B27] rounded-xl hover:shadow-[0_0_20px_rgba(212,175,55,0.5)] hover:scale-[1.02] transition-all whitespace-nowrap"
             >
               <span>Director's Office</span>

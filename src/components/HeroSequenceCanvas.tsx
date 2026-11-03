@@ -219,42 +219,27 @@ export const HeroSequenceCanvas: React.FC<HeroSequenceCanvasProps> = ({ onExplor
           </div>
         )}
 
-        {/* Frame HUD Counter (Quiet, Editorial) */}
-        <div className="absolute bottom-8 left-8 z-30 hidden sm:flex items-center gap-3 text-xs tracking-[0.2em] font-mono text-[#94A3B8]/60">
-          <span>FRAME</span>
-          <span className="text-[#F3E5AB] font-semibold">{String(activeFrameDisplay).padStart(4, '0')}</span>
-          <span className="text-[#94A3B8]/40">/ {TOTAL_FRAMES}</span>
-          <span className="text-[#94A3B8]/30">·</span>
-          <span>15 FPS SCROLL SCRUBBER</span>
-        </div>
-
         {/* Centerpiece 1: Vayomira Logo Fly-Through (Scroll 0% to 45%) */}
         {logoState.visible && (
           <div
-            className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20 px-6"
-            style={{
-              opacity: logoState.opacity,
-              transform: `scale(${logoState.scale})`,
-              filter: `blur(${logoState.blurPx}px) drop-shadow(0 0 ${25 + logoState.scale * 10}px rgba(212, 175, 55, 0.45))`,
-              transition: 'filter 0.1s ease-out',
-            }}
+            id="hero-logo-container"
+            className="absolute left-1/2 -translate-x-1/2 top-[40%] flex flex-col items-center text-center pointer-events-none z-20 px-6"
           >
-            <div className="flex flex-col items-center text-center max-w-2xl">
-              {/* Primary Vayomira Company Logo with Winged V, Circle, Pole Star */}
+            <div
+              className="flex flex-col items-center text-center max-w-2xl"
+              style={{
+                opacity: logoState.opacity,
+                transform: `scale(${logoState.scale})`,
+                filter: `blur(${logoState.blurPx}px) drop-shadow(0 0 ${25 + logoState.scale * 10}px rgba(212, 175, 55, 0.45))`,
+                transition: 'filter 0.1s ease-out',
+              }}
+            >
+              {/* Primary Vayomira Company Logo with Winged V, Circle, Pole Star (Emblem + embedded tagline) */}
               <img
                 src="/assets/aistudio/Vayomira_company_logo_7a777aa4.svg"
                 alt="Vayomira Company Emblem"
-                className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 object-contain drop-shadow-[0_0_35px_rgba(212,175,55,0.6)]"
+                className="w-56 h-56 sm:w-72 sm:h-72 md:w-88 md:h-88 lg:w-96 lg:h-96 object-contain drop-shadow-[0_0_40px_rgba(212,175,55,0.65)]"
               />
-
-              {/* Tagline Badge */}
-              <div className="mt-4 flex items-center gap-3 text-xs sm:text-sm tracking-[0.28em] uppercase font-medium text-[#F3E5AB]">
-                <span>CREATE</span>
-                <span className="text-[#D4AF37]">·</span>
-                <span>EXPAND</span>
-                <span className="text-[#D4AF37]">·</span>
-                <span>TRANSCEND</span>
-              </div>
             </div>
           </div>
         )}

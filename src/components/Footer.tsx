@@ -100,10 +100,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenManager, onOpenInquiry }) 
             <div className="text-left md:text-right space-y-1">
               <span className="text-[11px] uppercase tracking-wider text-[#94A3B8] block">DIRECT PATRON LINE</span>
               <a
-                href="mailto:shivanshmalaviya@gmail.com"
+                href="mailto:shivansh@vayomira.com"
                 className="text-xs font-mono text-[#F3E5AB] hover:underline"
               >
-                shivanshmalaviya@gmail.com
+                shivansh@vayomira.com
               </a>
             </div>
           </div>

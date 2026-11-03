@@ -87,89 +87,63 @@ export const BentoCapabilities: React.FC<BentoCapabilitiesProps> = ({ onSelectCa
         </p>
       </div>
 
-      {/* Bento Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
-        {CAPABILITIES.map((cap, idx) => {
+      {/* Uniform 4-Column Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+        {CAPABILITIES.map((cap) => {
           const Icon = cap.icon;
-          // Card 1: col-span-7, Card 2: col-span-5, Card 3: col-span-5, Card 4: col-span-7
-          const colSpan =
-            idx === 0
-              ? 'lg:col-span-7'
-              : idx === 1
-              ? 'lg:col-span-5'
-              : idx === 2
-              ? 'lg:col-span-5'
-              : 'lg:col-span-7';
 
           return (
-            <div
+            <button
+              type="button"
               key={cap.id}
               onMouseEnter={() => setActiveCardId(cap.id)}
               onMouseLeave={() => setActiveCardId(null)}
               onClick={() => onSelectCapability(cap)}
-              className={`${colSpan} group relative overflow-hidden rounded-2xl bg-[#090D1E]/75 backdrop-blur-xl border border-[#D4AF37]/15 p-8 sm:p-10 transition-all duration-500 hover:border-[#D4AF37]/45 hover:shadow-[0_15px_40px_-10px_rgba(212,175,55,0.15)] flex flex-col justify-between cursor-pointer`}
+              className="group relative overflow-hidden rounded-2xl bg-[#090D1E]/80 backdrop-blur-xl border border-[#D4AF37]/20 p-8 sm:p-9 transition-all duration-300 hover:border-[#D4AF37]/60 hover:shadow-[0_15px_35px_-8px_rgba(212,175,55,0.22)] hover:-translate-y-1 flex flex-col justify-between text-left cursor-pointer h-full min-h-[300px]"
             >
-              {/* Radial Golden Light Sweep Following Hover */}
+              {/* Radial Golden Light Glow Following Hover */}
               <div
                 className={`absolute inset-0 pointer-events-none transition-opacity duration-500 ${
                   activeCardId === cap.id ? 'opacity-100' : 'opacity-0'
                 }`}
                 style={{
                   background:
-                    'radial-gradient(600px circle at 50% 30%, rgba(212, 175, 55, 0.08), transparent 60%)',
+                    'radial-gradient(400px circle at 50% 30%, rgba(212, 175, 55, 0.12), transparent 70%)',
                 }}
               />
 
-              {/* Top Row: Number & Icon */}
+              {/* Top Row: Capability Number & Icon */}
               <div>
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <span className="text-xs font-mono tracking-widest text-[#D4AF37] font-semibold">
-                      {cap.number}.
-                    </span>
-                    <span className="text-xs uppercase tracking-[0.2em] text-[#94A3B8]">
-                      {cap.subtitle}
-                    </span>
-                  </div>
-                  <div className="w-10 h-10 rounded-xl bg-[#020617] border border-[#D4AF37]/25 flex items-center justify-center text-[#F3E5AB] group-hover:scale-110 group-hover:border-[#D4AF37]/60 group-hover:shadow-[0_0_15px_rgba(212,175,55,0.3)] transition-all duration-300">
-                    <Icon className="w-5 h-5" />
+                <div className="flex items-center justify-between mb-8">
+                  <span className="text-sm font-mono tracking-widest text-[#D4AF37] font-bold">
+                    {cap.number}
+                  </span>
+                  <div className="w-12 h-12 rounded-xl bg-[#020617] border border-[#D4AF37]/30 flex items-center justify-center text-[#F3E5AB] group-hover:scale-110 group-hover:border-[#D4AF37]/70 group-hover:shadow-[0_0_20px_rgba(212,175,55,0.35)] transition-all duration-300">
+                    <Icon className="w-6 h-6 text-[#D4AF37] group-hover:text-[#F3E5AB] transition-colors" />
                   </div>
                 </div>
 
-                {/* Card Title */}
-                <h3 className="text-xl sm:text-2xl font-bold text-[#F8FAFC] group-hover:text-[#F3E5AB] transition-colors mb-3 leading-snug">
+                {/* Subtitle Eyebrow */}
+                <span className="text-[11px] uppercase tracking-[0.22em] text-[#94A3B8]/80 block mb-2 font-mono">
+                  {cap.subtitle}
+                </span>
+
+                {/* Main Heading Only (No paragraph text in resting state) */}
+                <h3 className="text-xl sm:text-2xl font-bold text-[#F8FAFC] group-hover:text-[#F3E5AB] transition-colors leading-snug">
                   {cap.title}
                 </h3>
-
-                {/* Description */}
-                <p className="text-sm text-[#94A3B8] leading-relaxed mb-6">
-                  {cap.description}
-                </p>
-
-                {/* Highlight Quote Box */}
-                <div className="p-3.5 rounded-lg bg-[#020617]/60 border border-[#D4AF37]/10 text-xs text-[#F8FAFC]/90 italic mb-6">
-                  "{cap.highlight}"
-                </div>
               </div>
 
-              {/* Bottom Row: Unboxed Tags + Trigger Button */}
-              <div className="pt-4 border-t border-[#D4AF37]/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                {/* Zero-Pill Unboxed Metadata with · separator */}
-                <div className="flex flex-wrap items-center gap-2 text-xs text-[#94A3B8]">
-                  {cap.tags.slice(0, 3).map((tag, tIdx) => (
-                    <React.Fragment key={tag}>
-                      <span>{tag}</span>
-                      {tIdx < 2 && <span className="text-[#D4AF37]/50" aria-hidden="true">·</span>}
-                    </React.Fragment>
-                  ))}
-                </div>
-
-                <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-[#D4AF37] group-hover:text-[#F3E5AB] transition-colors whitespace-nowrap shrink-0">
-                  <span>Explore Workflow</span>
-                  <ArrowUpRight className="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              {/* Bottom Interactive Prompt */}
+              <div className="pt-6 border-t border-[#D4AF37]/15 flex items-center justify-between mt-6">
+                <span className="text-xs uppercase tracking-[0.16em] font-semibold text-[#D4AF37] group-hover:text-[#F3E5AB] transition-colors">
+                  Explore Workflow
+                </span>
+                <div className="w-7 h-7 rounded-full bg-[#020617] border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] group-hover:text-[#F8FAFC] group-hover:border-[#D4AF37] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all">
+                  <ArrowUpRight className="w-3.5 h-3.5" />
                 </div>
               </div>
-            </div>
+            </button>
           );
         })}
       </div>
