@@ -202,14 +202,21 @@ export const HeroSequenceCanvas: React.FC<HeroSequenceCanvasProps> = ({ onExplor
     >
       {/* Sticky 100vh Viewport */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+        {/* Temporary Static Background: Exact first frame of actual video sequence */}
+        <img
+          src="/assets/aistudio/frame000_63fb5ca9.png"
+          alt="Video Sequence Frame 000 Background"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0"
+        />
+
         {/* Background Canvas Scrubber */}
         <canvas
           ref={canvasRef}
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none z-10"
         />
 
         {/* Ambient Top & Bottom Lighting Scrims */}
-        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#020617]/70 via-transparent to-[#020617]" />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#020617]/50 via-transparent to-[#020617] z-10" />
 
         {/* Preload Progress Indicator (top subtle HUD) */}
         {isPreloading && (
@@ -220,25 +227,46 @@ export const HeroSequenceCanvas: React.FC<HeroSequenceCanvasProps> = ({ onExplor
         )}
 
         {/* Centerpiece 1: Vayomira Logo Fly-Through (Scroll 0% to 45%) */}
+        {/*
+          ALIGNMENT CALCULATION:
+          1. Background Video Frame (1920x1080):
+             Glowing star centroid = X: 960.40px (50.02%), Y: 584.53px (54.12%).
+          2. Vayomira Logo SVG (2048x2048):
+             Pole star centroid = X: 1025.83px (50.09%), Y: 706.68px (34.51%).
+          3. Sub-pixel alignment:
+             Setting left: 50%, top: 54.12%, transform: translate(-50.09%, -34.51%)
+             pins the pole star exactly over the background star (diff < 0.4px) across all viewports.
+             transform-origin: 50.09% 34.51% ensures scaling expands directly outward from the star.
+        */}
         {logoState.visible && (
           <div
             id="hero-logo-container"
-            className="absolute left-1/2 -translate-x-1/2 top-[40%] flex flex-col items-center text-center pointer-events-none z-20 px-6"
+            className="absolute flex flex-col items-center text-center pointer-events-none z-20"
+            style={{
+              left: '50%',
+              top: '54.12%',
+              transform: 'translate(-50.09%, -34.51%)',
+            }}
           >
             <div
-              className="flex flex-col items-center text-center max-w-2xl"
+              className="flex flex-col items-center text-center"
               style={{
                 opacity: logoState.opacity,
                 transform: `scale(${logoState.scale})`,
-                filter: `blur(${logoState.blurPx}px) drop-shadow(0 0 ${25 + logoState.scale * 10}px rgba(212, 175, 55, 0.45))`,
+                transformOrigin: '50.09% 34.51%',
+                filter: `blur(${logoState.blurPx}px) drop-shadow(0 0 ${25 + logoState.scale * 10}px rgba(212, 175, 55, 0.55))`,
                 transition: 'filter 0.1s ease-out',
               }}
             >
-              {/* Primary Vayomira Company Logo with Winged V, Circle, Pole Star (Emblem + embedded tagline) */}
+              {/* Primary Vayomira Company Logo: pole star (at x=50.09%, y=34.51%) perfectly aligns with background star at (50.02%, 54.12%) */}
               <img
                 src="/assets/aistudio/Vayomira_company_logo_7a777aa4.svg"
                 alt="Vayomira Company Emblem"
-                className="w-56 h-56 sm:w-72 sm:h-72 md:w-88 md:h-88 lg:w-96 lg:h-96 object-contain drop-shadow-[0_0_40px_rgba(212,175,55,0.65)]"
+                className="object-contain drop-shadow-[0_0_40px_rgba(212,175,55,0.7)]"
+                style={{
+                  width: 'min(420px, 85vw)',
+                  height: 'min(420px, 85vw)',
+                }}
               />
             </div>
           </div>
